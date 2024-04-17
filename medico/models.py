@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from datetime import datetime
 
 
 
@@ -30,7 +31,24 @@ class DadosMedico(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    @property
+    def proxima_data(self):
+        proxima_data = DatasAbertas.objects.filter(user=self.user).filter(data__gt=datetime.now()).filter(agendado=False).order_by('data').first()
+        if not proxima_data:
+            proxima_data = 'Nenhuma data disponível.'
+        return proxima_data
 
+
+class DatasAbertas(models.Model):
+    
+    data = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    agendado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.data)
+    
 
 def is_medico(user):
     return DadosMedico.objects.filter(user=user).exists()

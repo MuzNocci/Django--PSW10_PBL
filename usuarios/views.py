@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 
-from django.http import HttpResponse
-
 
 
 def cadastro(request):
@@ -57,13 +55,11 @@ def cadastro(request):
                 return render(request, 'cadastro.html')
 
 
-
 def login(request):
 
     if request.method == "GET":
 
         return render(request, 'login.html')
-    
 
     elif request.method == "POST":
 
@@ -73,7 +69,7 @@ def login(request):
 
         if user:
             auth.login(request, user)
-            return redirect('/pacientes/home')
+            return redirect('home')
         
         messages.add_message(request, messages.constants.ERROR, 'Usuário ou senha incorretos')
         context = {
@@ -81,7 +77,6 @@ def login(request):
         }
         return render(request, 'login.html', context)
     
-
 
 def logout(request):
 
