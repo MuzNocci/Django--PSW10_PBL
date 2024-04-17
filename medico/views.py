@@ -11,7 +11,9 @@ def cadastro_medico(request):
 
 
     if is_medico(request.user):
+
         messages.add_message(request, messages.constants.WARNING, 'Você já está cadastrado como médico.')
+        
         return redirect('/medicos/abrir_horario')
     
     if request.method == "GET":
