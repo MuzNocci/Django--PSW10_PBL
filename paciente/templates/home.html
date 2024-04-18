@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block 'title' %}HEALING | Paciente{% endblock 'title' %}
+{% block 'title' %}HEALING | Bem vindo!{% endblock 'title' %}
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'medicos/css/abrir_horario.css' %}">
@@ -50,15 +50,15 @@
                     <div class="row mb-3">
                         <div class="col-md-2"><img src="{{medico.foto.url}}" class="foto-perfil-card" alt=""></div>
                         <div class="col-md">
-                            <p style="font-size: 20px" class="p-bold">Dr(a). {{medico.nome}} <i class="bi bi-patch-check-fill icon-main"></i></p>
-                            <p>Especialidade: {{medico.especialidade}}</p>
-                            <p>{{medico.descricao}}</p>
+                            <p style="font-size: 20px" class="p-bold">Dr(a). {{ medico.nome }} <i class="bi bi-patch-check-fill icon-main"></i></p>
+                            <p>Especialidade: {{ medico.especialidade }}</p>
+                            <p>{{ medico.descricao }}</p>
                         </div>
                     </div>  
-                    <p><i class="bi bi-map icon-main"></i>&nbsp&nbsp{{medico.rua}}, {{medico.numero}}.</p>
+                    <p><i class="bi bi-map icon-main"></i>&nbsp&nbsp{{ medico.rua }}, {{ medico.numero }}.</p>
                     <p><i class="bi bi-calendar2-week icon-main"></i>&nbsp&nbspProxima data: {{ medico.proxima_data }}</p>
                         
-                    <a href="#" class="btn btn-success btn-dark-color">Agendar</a>
+                    <a href="{% url 'escolher_horario' medico.id %}" class="btn btn-success btn-dark-color">Agendar</a>
                 </div>
                 <br>
                 {% endfor %}
